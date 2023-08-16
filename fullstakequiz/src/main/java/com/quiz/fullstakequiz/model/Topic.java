@@ -6,24 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Answer implements Serializable {
+public class Topic implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false, unique = true, name = "id_answer")
+    @Column(nullable = false, updatable = false, unique = true, name = "id_topic")
     private Long id;
 
-    private String risposta;
+    private String topicTitle;
 
-    private boolean esito;
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_quiz")
     private Quiz quizEntity;
+
 
 }

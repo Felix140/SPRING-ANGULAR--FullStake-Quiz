@@ -16,14 +16,16 @@ public class Quiz implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(nullable = false, updatable = false, unique = true, name = "id_quiz")
     private Long id;
 
     private String domanda;
 
-    private String topic;
+    @OneToOne(mappedBy = "quizEntity")
+    private Topic topicEntity;
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "quizEntity")
     private Set<Answer> risposte;
 
 }

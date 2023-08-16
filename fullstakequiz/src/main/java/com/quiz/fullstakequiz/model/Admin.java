@@ -11,19 +11,15 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Answer implements Serializable {
+public class Admin implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false, unique = true, name = "id_answer")
+    @Column(nullable = false, updatable = false, unique = true, name = "id_admin")
     private Long id;
 
-    private String risposta;
 
-    private boolean esito;
+    private String adminName;
 
-    @ManyToOne
-    @JoinColumn(name = "id_quiz")
-    private Quiz quizEntity;
-
+    private String password;
 }
