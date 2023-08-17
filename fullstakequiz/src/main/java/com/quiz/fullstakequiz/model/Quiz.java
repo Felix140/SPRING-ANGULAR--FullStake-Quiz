@@ -28,4 +28,21 @@ public class Quiz implements Serializable {
     @OneToMany(mappedBy = "quizEntity")
     private Set<Answer> risposte;
 
+    //* SETTERS
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDomanda(String domanda) {
+        this.domanda = domanda;
+    }
+
+    public void setTopicEntity(Topic topicEntity) {
+        this.topicEntity = topicEntity;
+    }
+
+    public void setRisposte(Set<Answer> risposte) {
+        this.risposte = risposte;
+    }
 }

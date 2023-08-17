@@ -26,4 +26,21 @@ public class Answer implements Serializable {
     @JoinColumn(name = "id_quiz")
     private Quiz quizEntity;
 
+    //* SETTERS
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRisposta(String risposta) {
+        this.risposta = risposta;
+    }
+
+    public void setEsito(boolean esito) {
+        this.esito = esito;
+    }
+
+    public void setQuizEntity(Quiz quizEntity) {
+        this.quizEntity = quizEntity;
+    }
 }

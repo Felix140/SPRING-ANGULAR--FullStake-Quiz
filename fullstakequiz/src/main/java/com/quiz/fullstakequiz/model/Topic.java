@@ -25,5 +25,17 @@ public class Topic implements Serializable {
     @JoinColumn(name = "id_quiz")
     private Quiz quizEntity;
 
+    //* SETTERS
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTopicTitle(String topicTitle) {
+        this.topicTitle = topicTitle;
+    }
+
+    public void setQuizEntity(Quiz quizEntity) {
+        this.quizEntity = quizEntity;
+    }
 }

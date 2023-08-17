@@ -22,4 +22,18 @@ public class Admin implements Serializable {
     private String adminName;
 
     private String password;
+
+    //* SETTERS
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
