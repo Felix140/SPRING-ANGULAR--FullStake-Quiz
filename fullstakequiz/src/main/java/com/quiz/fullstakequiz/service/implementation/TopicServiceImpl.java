@@ -26,15 +26,15 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public Collection<Topic> list(Quiz quiz) {
+    public Collection<Topic> list() {
         log.info("Recupero tutti i TOPIC");
         return topicRepo.findAll();
     }
 
     @Override
-    public String get(Topic topicTitle) {
-        log.info("TOPIC recuperato: {}", topicTitle);
-        return topicTitle.getTopicTitle(); //!
+    public Topic get(Long id) {
+        log.info("TOPIC recuperato: {}", id);
+        return topicRepo.findById(id).get(); //!
     }
 
     @Override

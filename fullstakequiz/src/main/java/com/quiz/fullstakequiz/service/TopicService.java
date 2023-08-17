@@ -9,9 +9,9 @@ public interface TopicService {
 
     Topic create(Topic topic);
 
-    Collection<Topic> list(Quiz quiz);
+    Collection<Topic> list();
 
-    String get(Topic topicTitle);
+    Topic get(Long id);
 
     Topic update(Topic topic);
 

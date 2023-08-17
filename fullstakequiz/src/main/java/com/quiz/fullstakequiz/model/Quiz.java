@@ -23,7 +23,8 @@ public class Quiz implements Serializable {
     @Column(columnDefinition = "VARCHAR(500)")
     private String domanda;
 
-    @OneToOne(mappedBy = "quizEntity")
+    @ManyToOne
+    @JoinColumn(name = "id_topic")
     private Topic topicEntity;
 
     @OneToMany(mappedBy = "quizEntity")

@@ -21,9 +21,8 @@ public class Topic implements Serializable {
 
     private String topicTitle;
 
-    @OneToOne
-    @JoinColumn(name = "id_quiz")
-    private Quiz quizEntity;
+    @OneToMany(mappedBy = "topicEntity")
+    private Set<Quiz> quiz;
 
     //* SETTERS
 
@@ -35,7 +34,7 @@ public class Topic implements Serializable {
         this.topicTitle = topicTitle;
     }
 
-    public void setQuizEntity(Quiz quizEntity) {
-        this.quizEntity = quizEntity;
+    public void setQuizEntity(Set<Quiz> quizEntity) {
+        this.quiz = quizEntity;
     }
 }
