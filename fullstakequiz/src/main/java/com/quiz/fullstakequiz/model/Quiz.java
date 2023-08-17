@@ -20,6 +20,7 @@ public class Quiz implements Serializable {
     @Column(nullable = false, updatable = false, unique = true, name = "id_quiz")
     private Long id;
 
+    @Column(columnDefinition = "VARCHAR(500)")
     private String domanda;
 
     @OneToOne(mappedBy = "quizEntity")

@@ -18,6 +18,7 @@ public class Answer implements Serializable {
     @Column(nullable = false, updatable = false, unique = true, name = "id_answer")
     private Long id;
 
+    @Column(columnDefinition = "VARCHAR(500)")
     private String risposta;
 
     private boolean esito;

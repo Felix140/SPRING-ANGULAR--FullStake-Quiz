@@ -2,6 +2,7 @@ package com.quiz.fullstakequiz.resource;
 
 import com.quiz.fullstakequiz.model.Quiz;
 import com.quiz.fullstakequiz.service.implementation.QuizServiceImpl;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,8 @@ public class QuizResource {
     }
 
     //* DELETE
-    @PutMapping("/delete/{id}")
+    @Transactional
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Quiz> deleteQuiz(@PathVariable("id") Long id) {
         quizService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

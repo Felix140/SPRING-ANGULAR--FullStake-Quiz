@@ -26,8 +26,8 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public Collection<Answer> list(Answer quizEntity) {
-        log.info("Recupero tutte le ANSWERS del quiz: {}", quizEntity.getQuizEntity() );
+    public Collection<Answer> list() {
+        log.info("Recupero tutte le ANSWERS del quiz");
         return answerRepo.findAll();
     }
 
@@ -40,7 +40,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Answer update(Answer answer) {
         log.info("ANSWER in aggiornamento: {}", answer.getRisposta());
-        return null;
+        return answerRepo.save(answer);
     }
 
     @Override
