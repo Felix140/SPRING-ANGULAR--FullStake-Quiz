@@ -2,7 +2,7 @@ package com.quiz.fullstakequiz.resource;
 
 
 import com.quiz.fullstakequiz.model.Topic;
-import com.quiz.fullstakequiz.service.TopicService;
+import com.quiz.fullstakequiz.service.implementation.TopicServiceImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class TopicResource {
 
-    private final TopicService topicService;
+    private final TopicServiceImpl topicService;
 
     //* POST
     @PostMapping("/add")

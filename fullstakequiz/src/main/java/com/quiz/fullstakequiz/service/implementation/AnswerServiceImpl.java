@@ -1,7 +1,6 @@
 package com.quiz.fullstakequiz.service.implementation;
 
 import com.quiz.fullstakequiz.model.Answer;
-import com.quiz.fullstakequiz.model.Quiz;
 import com.quiz.fullstakequiz.repo.AnswerRepo;
 import com.quiz.fullstakequiz.service.AnswerService;
 import jakarta.transaction.Transactional;
@@ -28,8 +27,14 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public Collection<Answer> list() {
-        log.info("Recupero tutte le ANSWERS del quiz");
+        log.info("Recupero tutte le ANSWERS");
         return answerRepo.findAll();
+    }
+
+    @Override
+    public Collection<Answer> listByQuiz(Long quizId) {
+        log.info("Recupero tutte le ANSWERS del QUIZ: {}", quizId);
+        return answerRepo.findByQuizEntity_Id(quizId);
     }
 
     @Override

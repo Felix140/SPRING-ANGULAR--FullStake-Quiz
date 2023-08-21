@@ -2,8 +2,7 @@ package com.quiz.fullstakequiz.resource;
 
 
 import com.quiz.fullstakequiz.model.Answer;
-import com.quiz.fullstakequiz.model.Quiz;
-import com.quiz.fullstakequiz.service.AnswerService;
+import com.quiz.fullstakequiz.service.implementation.AnswerServiceImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class AnswerResource {
 
-    private final AnswerService answerService;
+    private final AnswerServiceImpl answerService;
 
     //* POST
     @PostMapping("/add")
@@ -32,6 +31,13 @@ public class AnswerResource {
     public ResponseEntity<Collection<Answer>> getAllAnswers() {
         Collection<Answer> allAnswers = answerService.list();
         return new ResponseEntity<>(allAnswers, HttpStatus.OK);
+    }
+
+    //* GET (listByQuiz): Filtra per quiz
+    @GetMapping("/find_quiz/{id}")
+    public ResponseEntity<Collection<Answer>> getAnswersByQuiz(@PathVariable("id") Long quizId) {
+        Collection<Answer> answersByQuiz = answerService.listByQuiz(quizId);
+        return new ResponseEntity<>(answersByQuiz, HttpStatus.OK);
     }
 
     //* GET

@@ -11,6 +11,8 @@ public interface AnswerService {
 
     Collection<Answer> list();
 
+    Collection<Answer> listByQuiz(Long quizId);
+
     Answer get(Long id);
 
     Answer update(Answer answer);
