@@ -24,7 +24,7 @@ public class Answer implements Serializable {
     private boolean esito;
 
     @ManyToOne
-    @JoinColumn(name = "id_quiz")
+    @JoinColumn(name = "id_quiz", nullable = false)
     private Quiz quizEntity;
 
     //* SETTERS

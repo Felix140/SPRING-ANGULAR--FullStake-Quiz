@@ -17,6 +17,7 @@ import java.util.List;
 public class QuizResource {
 
     private final QuizServiceImpl quizService;
+    private final AnswerResource answerResource;
 
 
     //* POST
@@ -52,6 +53,7 @@ public class QuizResource {
     @Transactional
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Quiz> deleteQuiz(@PathVariable("id") Long id) {
+        answerResource.deleteAnswerByQuiz(id); //* DELETE (BY QUIZ) = Elimina le risposte associate
         quizService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

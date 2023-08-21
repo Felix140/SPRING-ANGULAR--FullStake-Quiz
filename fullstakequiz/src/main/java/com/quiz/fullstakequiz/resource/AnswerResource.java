@@ -8,7 +8,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -52,8 +51,16 @@ public class AnswerResource {
     //* DELETE
     @Transactional
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Quiz> deleteAnswer(@PathVariable("id") Long id) {
+    public ResponseEntity<Answer> deleteAnswer(@PathVariable("id") Long id) {
         answerService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //* DELETE (BY QUIZ)
+    @Transactional
+    @DeleteMapping("/delete_group/{id}")
+    public void deleteAnswerByQuiz(@PathVariable("id") Long quizId) {
+        answerService.deleteGroupByQuizId(quizId);
+        new ResponseEntity<>(HttpStatus.OK);
     }
 }

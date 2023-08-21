@@ -16,7 +16,6 @@ public class Quiz implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(nullable = false, updatable = false, unique = true, name = "id_quiz")
     private Long id;
 
@@ -27,7 +26,7 @@ public class Quiz implements Serializable {
     @JoinColumn(name = "id_topic")
     private Topic topicEntity;
 
-    @OneToMany(mappedBy = "quizEntity")
+    @OneToMany(mappedBy = "quizEntity", cascade = CascadeType.ALL, orphanRemoval = true)//!
     private Set<Answer> risposte;
 
     //* SETTERS

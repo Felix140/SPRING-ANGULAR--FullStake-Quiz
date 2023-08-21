@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -49,4 +50,14 @@ public class AnswerServiceImpl implements AnswerService {
         answerRepo.deleteById(id);
         return Boolean.TRUE;
     }
+
+    @Override
+    public void deleteGroupByQuizId(Long quizId) {
+        List<Answer> answersToDelete = answerRepo.findByQuizEntity_Id(quizId);
+        for (Answer answer : answersToDelete) {
+            answerRepo.delete(answer);
+        }
+    }
+
+
 }
