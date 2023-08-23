@@ -1,1 +1,85 @@
-<p>question works!</p>
+<div class="container mt-5">
+    <div class="card px-5">
+
+        <div class="d-flex justify-content-between p-3">
+            <div class="image">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968282.png" alt="java"
+                    style="width: 90px; height: 90px;">
+            </div>
+            <!-- TOPIC -->
+            <div class="quiz-header">
+                <h4>TOPIC</h4>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-around py-3">
+            <div class="score">
+                <h5>20 Points</h5>
+            </div>
+            <div class="question-remain">
+                <span>Question 1 di 9</span>
+            </div>
+            <div class="timer text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z" />
+                    <path
+                        d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="progress my-3" role="progressbar" aria-label="Warning striped example" aria-valuenow="75"
+            aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar progress-bar-striped bg-warning" style="width: 10%"></div>
+        </div>
+
+        <!-- QUESTION -->
+        <div class="question">
+            <div class="card">
+                <h3>Che cosa è una classe di tipo Enum e quali sono le sue caratteristiche principali?</h3>
+            </div>
+        </div>
+
+        <!-- ANSWERS -->
+        <div class="options answers">
+            <ol>
+                <li class="answers__list card">Una classe Enum è una classe che rappresenta un tipo che definisce un
+                    numero
+                    ben preciso di proprie
+                    istanze costanti, statiche e pubbliche. Quando si dichiara un Enumerazione si dichiarano tutti i
+                    suoi elementi.</li>
+                <li class="answers__list card">Una classe Enum è una classe che rappresenta un tipo che definisce un
+                    numero
+                    indefinito di proprie
+                    istanze costanti e protected.</li>
+                <li class="answers__list card">Una classe Enum è una classe che rappresenta un tipo che definisce un
+                    numero
+                    infinito di variabili
+                    int.</li>
+            </ol>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="d-flex justify-content-between">
+            <!-- BACK -->
+            <div class="back" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                </svg>
+            </div>
+            <!-- NEXT -->
+            <div class="next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                </svg>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+.card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+li {
+    list-style-type: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.answers {
+    padding: 20px 0;
+    &__list:hover {
+        background-color: yellow;
+    }
+}
+
+ol {
+    padding: 0;
+}
