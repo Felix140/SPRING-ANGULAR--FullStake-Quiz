@@ -11,9 +11,9 @@
 
     <div class="col-md-4">
         <label for="username">Inserisci il tuo Username: </label>
-        <input type="text" name="username" id="username">
+        <input #username type="text" name="username" id="username" class="form-control">
     </div>
 
-    <button class="btn btn-primary text-uppercase fw-bold d-block m-auto mt-5" routerLink="/question">start</button>
+    <button class="btn btn-primary text-uppercase fw-bold d-block m-auto mt-5" routerLink="/question" (click)="startQuiz()">start</button>
 
 </div>
