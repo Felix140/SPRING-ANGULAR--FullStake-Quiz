@@ -12,9 +12,7 @@ export class WelcomeComponent implements OnInit{
 
   }
   
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void { }
 
   startQuiz() {
     localStorage.setItem("name", this.nameKey.nativeElement.value);

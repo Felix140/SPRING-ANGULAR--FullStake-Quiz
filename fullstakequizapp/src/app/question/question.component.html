@@ -8,18 +8,21 @@
             </div>
 
             <div class="quiz-header border border-primary">
+
                 <!-- TOPIC -->
                 <h4 class="border border-danger text-end">TOPIC</h4>
+
                 <!-- USERNAME -->
                 <span class="border border-secondary">Username del corsista:
                     <strong>{{name}}</strong>
                 </span>
+
             </div>
         </div>
 
         <div class="d-flex justify-content-around py-3">
 
-            <!-- TIMER -->
+            <!-- SCORE -->
             <div class="score">
                 <h5>{{points}} Points</h5>
             </div>
@@ -54,24 +57,27 @@
             <div class="card">
                 <h3>{{questionList[currentQuestion]?.domanda}}</h3>
             </div>
+            <!-- QUESTION Id HIDDEN-->
+            <input type="number" name="quizId" id="quizId" [ngModel]="questionList[currentQuestion]?.id" hidden>
+            <!--! È necessario usare FormsModule per utilizzare [ngModel] -->
         </div>
 
         <!-- ANSWERS -->
         <div class="options answers">
             <ol>
-                <li class="answers__list card">Una classe Enum è una classe che rappresenta un tipo che definisce un
-                    numero
-                    ben preciso di proprie
-                    istanze costanti, statiche e pubbliche. Quando si dichiara un Enumerazione si dichiarano tutti i
-                    suoi elementi.</li>
-                <li class="answers__list card">Una classe Enum è una classe che rappresenta un tipo che definisce un
-                    numero
-                    indefinito di proprie
-                    istanze costanti e protected.</li>
-                <li class="answers__list card">Una classe Enum è una classe che rappresenta un tipo che definisce un
-                    numero
-                    infinito di variabili
-                    int.</li>
+                <!-- Creo DUE ng-container -->
+                <!--? Faccio un ciclo sull'ARRAY answerListByQuiz -->
+                <ng-container *ngFor="let answer of answerListByQuiz; let i = index">
+
+                    <!--? Verifica se la risposta appartiene al quiz corrente -->
+                    <ng-container *ngIf="answer.quizEntity.id === getCurrentQuestionId()">
+                        <li class="answers__list card">
+                            {{answer.risposta}}
+                        </li>
+                    </ng-container>
+
+                </ng-container>
+
             </ol>
         </div>
 
