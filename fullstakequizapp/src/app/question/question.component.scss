@@ -10,12 +10,6 @@ li {
     margin: 10px 0;
 }
 
-.card {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-}
-
 .answers {
     padding: 20px 0;
     &__list:hover {
@@ -26,11 +20,4 @@ li {
 ol {
     padding: 0;
 }
-
-li {
-    list-style-type: none;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
 
