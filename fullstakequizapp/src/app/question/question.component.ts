@@ -53,6 +53,7 @@ export class QuestionComponent implements OnInit {
     this.currentQuestion++;
     this.progress += 10;
     this.getCurrentQuestionId();
+    this.resetCounter();
   }
 
   // DOMANDA PRECEDENTE
@@ -94,6 +95,7 @@ export class QuestionComponent implements OnInit {
     if (currentAnswer) {
       this.points += 10;
       this.correctAnswer++;
+      this.nextQuestion();
     } else {
       if (this.points !== 0) {
         this.points -= 10
@@ -101,6 +103,7 @@ export class QuestionComponent implements OnInit {
         this.points = 0;
       }
       this.wrongAnswer++;
+      this.nextQuestion();
     }
   }
 
