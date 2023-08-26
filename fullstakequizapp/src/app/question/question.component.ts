@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 import { AnswerService } from '../service/answer.service';
 import { QuestionService } from '../service/question.service';
 
@@ -15,8 +16,9 @@ export class QuestionComponent implements OnInit {
   public currentQuestion: number = 0;
   // Score
   public points: number = 0;
+  interval$: any;
   // Timer
-  public timer: number = 0;
+  public timer: number = 60;
   // ProgressBar
   public progress: number = 10;
 
@@ -33,6 +35,7 @@ export class QuestionComponent implements OnInit {
     this.getAllQuestions();
     this.getCurrentQuestionId();
     this.getAnswersByQuiz();
+    this.startCounter();
   }
 
   //* GET ALL => questions
@@ -42,6 +45,7 @@ export class QuestionComponent implements OnInit {
         console.log(res);
         this.questionList = res;
       })
+      // TODO Selezionare in maniera randomica 10 questions
   }
 
   // PROSSIMA DOMANDA
@@ -56,6 +60,17 @@ export class QuestionComponent implements OnInit {
     this.currentQuestion--;
     this.progress -= 10;
     this.getCurrentQuestionId();
+  }
+  
+  //RESETTA INTERO QUIZ
+  resetQuiz() {
+    this.resetCounter();
+    this.getAllQuestions();
+    this.points = 0;
+    this.timer = 60;
+    this.currentQuestion = 0;
+    this.progress = 10;
+    //TODO Randomizzare le domande
   }
 
   //* GET ALL ANSWERS(le filtro poi con ngIf)
@@ -88,4 +103,35 @@ export class QuestionComponent implements OnInit {
       this.wrongAnswer++;
     }
   }
+
+
+  //* TIMER
+  startCounter() {
+    
+    this.interval$ = interval(1000)
+    .subscribe(val=>{
+      this.timer--;
+      if(this.timer === 0) {
+        this.currentQuestion++;
+        this.timer = 60;
+        this.points -= 10;
+      }
+    });
+    
+    setTimeout(()=>{
+      this.interval$.unsubscribe();
+    }, 600000); //dopo 10min stoppa il timer
+  }
+  
+  stopCounter() {
+    this.interval$.unsubscribe();
+    this.timer = 0;
+  }
+  
+  resetCounter() {
+    this.stopCounter();
+    this.timer = 60;
+    this.startCounter();
+  }
+
 }
