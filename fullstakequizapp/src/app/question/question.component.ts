@@ -45,15 +45,18 @@ export class QuestionComponent implements OnInit {
         console.log(res);
         this.questionList = res;
       })
-      // TODO Selezionare in maniera randomica 10 questions
+    // TODO Selezionare in maniera randomica 10 questions
   }
 
   // PROSSIMA DOMANDA
   nextQuestion() {
-    this.currentQuestion++;
-    this.progress += 10;
-    this.getCurrentQuestionId();
-    this.resetCounter();
+    // Metto un timeout prima di passare alla domanda successiva
+    setTimeout(() => {
+      this.currentQuestion++;
+      this.progress += 10;
+      this.getCurrentQuestionId();
+      this.resetCounter();
+    }, 1000);
   }
 
   // DOMANDA PRECEDENTE
@@ -62,7 +65,7 @@ export class QuestionComponent implements OnInit {
     this.progress -= 10;
     this.getCurrentQuestionId();
   }
-  
+
   //RESETTA INTERO QUIZ
   resetQuiz() {
     this.resetCounter();
@@ -110,27 +113,27 @@ export class QuestionComponent implements OnInit {
 
   //* TIMER
   startCounter() {
-    
+
     this.interval$ = interval(1000)
-    .subscribe(val=>{
-      this.timer--;
-      if(this.timer === 0) {
-        this.currentQuestion++;
-        this.timer = 60;
-        this.points -= 10;
-      }
-    });
-    
-    setTimeout(()=>{
+      .subscribe(val => {
+        this.timer--;
+        if (this.timer === 0) {
+          this.currentQuestion++;
+          this.timer = 60;
+          this.points -= 10;
+        }
+      });
+
+    setTimeout(() => {
       this.interval$.unsubscribe();
     }, 600000); //dopo 10min stoppa il timer
   }
-  
+
   stopCounter() {
     this.interval$.unsubscribe();
     this.timer = 0;
   }
-  
+
   resetCounter() {
     this.stopCounter();
     this.timer = 60;

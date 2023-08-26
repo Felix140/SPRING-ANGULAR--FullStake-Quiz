@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { QuestionComponent } from './question/question.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ChangeBgDirective } from './custom/change-bg.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     QuestionComponent,
-    HeaderComponent
+    HeaderComponent,
+    ChangeBgDirective
   ],
   imports: [
     BrowserModule,
