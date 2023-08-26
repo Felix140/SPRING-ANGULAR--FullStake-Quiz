@@ -23,6 +23,8 @@ export class QuestionComponent implements OnInit {
 
   //* ANSWER
   public answerListByQuiz: any = [];
+  correctAnswer: number = 0;
+  wrongAnswer: number = 0;
 
   constructor(private questionService: QuestionService, private answerService: AnswerService) { }
 
@@ -69,5 +71,21 @@ export class QuestionComponent implements OnInit {
   getCurrentQuestionId(): number {
     console.log(this.questionList[this.currentQuestion]?.id);
     return this.questionList[this.currentQuestion]?.id;
+  }
+
+  //* ESITO della Risposta
+  selectAnswer(currentAnswer: boolean): void {
+
+    if (currentAnswer) {
+      this.points += 10;
+      this.correctAnswer++;
+    } else {
+      if (this.points !== 0) {
+        this.points -= 10
+      } else {
+        this.points = 0;
+      }
+      this.wrongAnswer++;
+    }
   }
 }

@@ -71,7 +71,7 @@
 
                     <!--? Verifica se la risposta appartiene al quiz corrente -->
                     <ng-container *ngIf="answer.quizEntity.id === getCurrentQuestionId()">
-                        <li class="answers__list card">
+                        <li class="answers__list card" (click)="selectAnswer(answer.esito)">
                             {{answer.risposta}}
                         </li>
                     </ng-container>
