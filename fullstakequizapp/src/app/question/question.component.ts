@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { interval } from 'rxjs';
 import { AnswerService } from '../service/answer.service';
 import { QuestionService } from '../service/question.service';
@@ -22,12 +22,17 @@ export class QuestionComponent implements OnInit {
   // ProgressBar
   public progress: number = 10;
 
-
   //* ANSWER
   public answerListByQuiz: any = [];
   correctAnswer: number = 0;
   wrongAnswer: number = 0;
 
+  //* RESULTS (modal)
+  @ViewChild('resultButton') modalButton!: ElementRef;
+
+
+
+  
   constructor(private questionService: QuestionService, private answerService: AnswerService) { }
 
   ngOnInit(): void {
@@ -50,23 +55,34 @@ export class QuestionComponent implements OnInit {
 
   // PROSSIMA DOMANDA
   nextQuestion() {
-    // Metto un timeout prima di passare alla domanda successiva
-    setTimeout(() => {
-      this.currentQuestion++;
-      this.progress += 10;
-      this.getCurrentQuestionId();
-      this.resetCounter();
-    }, 1000);
+
+    if (this.currentQuestion + 1 === this.questionList.length) {
+      this.stopCounter();
+      // Clicca sul bottone del modal
+      setTimeout(() => {
+        this.modalButton.nativeElement.click();
+      }, 1000);
+      
+    } else {
+      // Metto un timeout prima di passare alla domanda successiva
+      setTimeout(() => {
+        this.currentQuestion++;
+        this.progress += 10;
+        this.getCurrentQuestionId();
+        this.resetCounter();
+      }, 1000);
+    }
+
   }
 
-  // DOMANDA PRECEDENTE
+  //* DOMANDA PRECEDENTE
   previousQuestion() {
     this.currentQuestion--;
     this.progress -= 10;
     this.getCurrentQuestionId();
   }
 
-  //RESETTA INTERO QUIZ
+  //* RESETTA INTERO QUIZ
   resetQuiz() {
     this.resetCounter();
     this.getAllQuestions();
@@ -139,5 +155,4 @@ export class QuestionComponent implements OnInit {
     this.timer = 60;
     this.startCounter();
   }
-
 }

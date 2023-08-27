@@ -71,7 +71,8 @@
 
                     <!--? Verifica se la risposta appartiene al quiz corrente -->
                     <ng-container *ngIf="answer.quizEntity.id === getCurrentQuestionId()">
-                        <li class="answers__list card" (click)="selectAnswer(answer.esito)" appChangeBg [isCorrect]="answer.esito">
+                        <li class="answers__list card" (click)="selectAnswer(answer.esito)" appChangeBg
+                            [isCorrect]="answer.esito">
                             {{answer.risposta}}
                         </li>
                     </ng-container>
@@ -85,7 +86,8 @@
         <div class="d-flex justify-content-between">
 
             <!-- BACK -->
-            <button [disabled]="currentQuestion===0" class="back btn btn-warning" (click)="previousQuestion()" hidden> <!-- [disabled] solo su btn può essere usato -->
+            <button [disabled]="currentQuestion===0" class="back btn btn-warning" (click)="previousQuestion()" hidden>
+                <!-- [disabled] solo su btn può essere usato -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                     class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
                     <path
@@ -106,7 +108,38 @@
                         d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                 </svg>
             </button>
+        </div>
+    </div>
+</div>
 
+<!-- TRIGGER modal -->
+<button #resultButton class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- RESULT MODAL: se isQuizCompleted MOSTRA questa mask -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            </div>
+
+            <div class="modal-body">
+                <p>Totale domande: {{questionList.length}} </p>
+                <p>Totale risposte corrette: {{correctAnswer}}</p>
+                <p>Totale risposte sbagliate: {{wrongAnswer}} </p>
+                <p>Totale punteggio: {{points}} punti </p>
+            </div>
+
+            <div class="modal-footer">
+                <!-- RESET -->
+                <button class="back btn btn-warning d-block m-auto" (click)="resetQuiz()">
+                    <strong>RIPROVA</strong>
+                </button>
+                <!-- EXIT -->
+                <button type="button" class="btn btn-primary" routerLink="/welcome">Esci</button>
+            </div>
         </div>
     </div>
 </div>
