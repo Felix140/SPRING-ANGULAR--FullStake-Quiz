@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Answer } from '../interface/answer';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Answer } from '../interface/answer';
 })
 export class AnswerService {
 
-  private readonly apiServerUrl = 'http://localhost:8080';
+  private readonly apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
