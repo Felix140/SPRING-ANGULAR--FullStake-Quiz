@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { shuffle } from 'lodash'; //! da installare (npm install lodash --save)
 import { interval } from 'rxjs';
 import { AnswerService } from '../service/answer.service';
 import { QuestionService } from '../service/question.service';
@@ -48,15 +49,15 @@ export class QuestionComponent implements OnInit {
     this.questionService.getQuestions()
       .subscribe(res => {
         console.log(res);
-        this.questionList = res;
+        //this.questionList = res;
+        this.questionList = shuffle(res).slice(0, 10); // MISCHIA in maniera RANDOMICA 10 questions
       })
-    // TODO Selezionare in maniera randomica 10 questions
   }
 
   // PROSSIMA DOMANDA
   nextQuestion() {
 
-    if (this.currentQuestion + 1 === this.questionList.length) {
+    if (this.currentQuestion + 1 === 10) {
       this.stopCounter();
       // Clicca sul bottone del modal
       setTimeout(() => {
@@ -90,7 +91,9 @@ export class QuestionComponent implements OnInit {
     this.timer = 60;
     this.currentQuestion = 0;
     this.progress = 10;
-    //TODO Randomizzare le domande
+    this.correctAnswer= 0;
+    this.wrongAnswer= 0;
+  
   }
 
   //* GET ALL ANSWERS(le filtro poi con ngIf)
@@ -98,7 +101,7 @@ export class QuestionComponent implements OnInit {
     this.answerService.getAnswers()
       .subscribe(res => {
         console.log(res);
-        this.answerListByQuiz = res;
+        this.answerListByQuiz = shuffle(res);
       });
   }
 

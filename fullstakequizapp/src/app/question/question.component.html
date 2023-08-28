@@ -29,7 +29,7 @@
 
             <!-- NUMBER CURRENT QUESTION -->
             <div class="question-remain">
-                <span>Question {{1 + currentQuestion}} di {{questionList.length}}</span>
+                <span>Question {{1 + currentQuestion}} di 10</span>
             </div>
 
             <!-- TIMER -->
@@ -113,7 +113,7 @@
 </div>
 
 <!-- TRIGGER modal -->
-<button #resultButton class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button #resultButton class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
     Launch demo modal
 </button>
 
@@ -122,12 +122,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Congratulazioni {{name}}!</h1>
             </div>
 
             <div class="modal-body">
-                <p>Totale domande: {{questionList.length}} </p>
-                <p>Totale risposte corrette: {{correctAnswer}}</p>
+                <p>Totale risposte corrette: {{correctAnswer}} / 10</p>
                 <p>Totale risposte sbagliate: {{wrongAnswer}} </p>
                 <p>Totale punteggio: {{points}} punti </p>
             </div>
