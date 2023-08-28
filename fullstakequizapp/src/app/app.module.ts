@@ -10,6 +10,8 @@ import { QuestionComponent } from './question/question.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ChangeBgDirective } from './custom/change-bg.directive';
 import { TopicConfigComponent } from './topic-config/topic-config.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { TopicConfigComponent } from './topic-config/topic-config.component';
     QuestionComponent,
     HeaderComponent,
     ChangeBgDirective,
-    TopicConfigComponent
+    TopicConfigComponent,
+    AdminLoginComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,

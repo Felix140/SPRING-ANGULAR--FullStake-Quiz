@@ -1,0 +1,10 @@
+.login-admin {
+    border: 1px solid red;
+    max-width: 300px;
+    margin: 0 auto;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+}

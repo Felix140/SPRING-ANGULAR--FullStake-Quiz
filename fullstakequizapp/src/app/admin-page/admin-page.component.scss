@@ -1,0 +1,10 @@
+.add-question {
+    width: 600px;
+    margin: 0 auto;
+
+    
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+}

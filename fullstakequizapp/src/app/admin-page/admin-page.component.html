@@ -1,0 +1,54 @@
+<div class="add-question">
+    <form action="" class="add-question__form">
+
+        <!-- SELEZIONA TOPIC (ngFor) -->
+        <select class="form-select" aria-label="Default select example">
+            <option Selected>Seleziona Topic </option>
+            <ng-container *ngFor="let topic of topicList; let i = index">
+                <!--? prendo l'INDEX di topicList -->
+                <option>{{ topicList[i].topicTitle }} </option>
+            </ng-container>
+        </select>
+
+        <!-- QUESTION -->
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">DOMANDA: </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="resize: none"></textarea>
+        </div>
+
+        <!-- RISPOSTE GIUSTA -->
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">VERO</label>
+            <textarea class="form-control border border-5 border-success" id="exampleFormControlTextarea1" rows="3"
+                style="resize: none"></textarea>
+        </div>
+
+        <!-- RISPOSTE FALSE -->
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">FALSO</label>
+            <textarea class="form-control  border border-5 border-danger" id="exampleFormControlTextarea1" rows="3"
+                style="resize: none"></textarea>
+        </div>
+
+        <!--? Aggiungi una sezione per le risposte errate -->
+        <div *ngFor="let answer of answers; let i = index" class="mb-3">
+            <button type="button" class="btn-close" aria-label="Close"></button>
+            <div>
+                <label for="exampleFormControlTextarea{{i}}" class="form-label"></label>
+                <textarea class="form-control  border border-5 border-danger" id="exampleFormControlTextarea{{i}}"
+                    rows="3" style="resize: none"></textarea>
+            </div>
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-success text-uppercase fw-bold" (click)="inviaForm()">Aggiungi QUESITO</button>
+            <button class="btn btn-secondary text-uppercase fw-bold" (click)="createWrongAns()">Aggiungi
+                Risposta</button>
+        </div>
+    </form>
+</div>
