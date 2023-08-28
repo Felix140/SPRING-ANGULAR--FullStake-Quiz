@@ -3,6 +3,7 @@ import { shuffle } from 'lodash'; //! da installare (npm install lodash --save)
 import { interval } from 'rxjs';
 import { AnswerService } from '../service/answer.service';
 import { QuestionService } from '../service/question.service';
+import { TopicService } from '../service/topic.service';
 
 @Component({
   selector: 'app-question',
@@ -33,8 +34,8 @@ export class QuestionComponent implements OnInit {
 
 
 
-  
-  constructor(private questionService: QuestionService, private answerService: AnswerService) { }
+
+  constructor(private questionService: QuestionService, private answerService: AnswerService, private topicService: TopicService) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
@@ -50,7 +51,9 @@ export class QuestionComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         //this.questionList = res;
-        this.questionList = shuffle(res).slice(0, 10); // MISCHIA in maniera RANDOMICA 10 questions
+        //this.questionList = shuffle(res).slice(0, 10); // MISCHIA in maniera RANDOMICA 10 questions
+        const selectedTopic = this.topicService.getSelectedTopic();
+        this.questionList = shuffle(res.filter((question: any) => question.topicEntity.topicTitle === selectedTopic)).slice(0, 10);
       })
   }
 
@@ -63,7 +66,7 @@ export class QuestionComponent implements OnInit {
       setTimeout(() => {
         this.modalButton.nativeElement.click();
       }, 1000);
-      
+
     } else {
       // Metto un timeout prima di passare alla domanda successiva
       setTimeout(() => {
@@ -91,9 +94,9 @@ export class QuestionComponent implements OnInit {
     this.timer = 60;
     this.currentQuestion = 0;
     this.progress = 10;
-    this.correctAnswer= 0;
-    this.wrongAnswer= 0;
-  
+    this.correctAnswer = 0;
+    this.wrongAnswer = 0;
+
     // chiudi Modal
     document.getElementById("close-modal")?.click();
   }

@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { QuestionComponent } from './question/question.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ChangeBgDirective } from './custom/change-bg.directive';
+import { TopicConfigComponent } from './topic-config/topic-config.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ChangeBgDirective } from './custom/change-bg.directive';
     WelcomeComponent,
     QuestionComponent,
     HeaderComponent,
-    ChangeBgDirective
+    ChangeBgDirective,
+    TopicConfigComponent
   ],
   imports: [
     BrowserModule,

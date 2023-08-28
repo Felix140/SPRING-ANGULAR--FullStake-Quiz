@@ -10,6 +10,7 @@ import { Topic } from '../interface/topic';
 export class TopicService {
 
   private readonly apiServerUrl = environment.apiBaseUrl;
+  private selectedTopic: string = "";
 
   constructor(private http: HttpClient) { }
 
@@ -39,5 +40,15 @@ export class TopicService {
   //* DELETE
   public deleteTopics(topicId: number): Observable<Topic[]> {
     return this.http.delete<Topic[]>(`${this.apiServerUrl}/topic/delete/${topicId}`);
+  }
+
+
+
+  //* GET e SET Topic SELEZIONATO -> topic-config.component.ts
+  setSelectedTopic(topic: string) {
+    this.selectedTopic = topic;
+  }
+  getSelectedTopic(): string {
+    return this.selectedTopic;
   }
 }

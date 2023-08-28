@@ -1,0 +1,18 @@
+<div class="card text-center">
+    <div class="card-header">
+        Configurazione Quiz
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Seleziona l'argomento</h5>
+
+        <div class="topic-button d-grid gap-2">
+            <ng-container *ngFor="let topic of topicList; let i = index">
+
+                <!-- BUTTON TOPIC -->
+                <button class="btn btn-warning text-uppercase fw-bold" type="button" routerLink="/question"
+                    (click)="selectTopic(topicList[i].topicTitle)">{{topicList[i].topicTitle}}</button>
+
+            </ng-container>
+        </div>
+    </div>
+</div>
