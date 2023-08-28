@@ -123,6 +123,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Congratulazioni {{name}}!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal" hidden></button>
             </div>
 
             <div class="modal-body">
@@ -136,8 +137,6 @@
                 <button class="back btn btn-warning d-block m-auto" (click)="resetQuiz()">
                     <strong>RIPROVA</strong>
                 </button>
-                <!-- EXIT -->
-                <button type="button" class="btn btn-primary" routerLink="/welcome">Esci</button>
             </div>
         </div>
     </div>

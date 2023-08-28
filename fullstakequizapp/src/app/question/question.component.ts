@@ -94,6 +94,8 @@ export class QuestionComponent implements OnInit {
     this.correctAnswer= 0;
     this.wrongAnswer= 0;
   
+    // chiudi Modal
+    document.getElementById("close-modal")?.click();
   }
 
   //* GET ALL ANSWERS(le filtro poi con ngIf)
