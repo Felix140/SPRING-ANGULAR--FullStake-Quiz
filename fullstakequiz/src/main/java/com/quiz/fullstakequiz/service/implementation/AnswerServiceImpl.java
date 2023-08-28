@@ -26,6 +26,12 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
+    public Collection<Answer> createList(Collection<Answer> answers) {
+        log.info("Lista ANSWER da salvare: {}", answers);
+        return answerRepo.saveAll(answers);
+    }
+
+    @Override
     public Collection<Answer> list() {
         log.info("Recupero tutte le ANSWERS");
         return answerRepo.findAll();

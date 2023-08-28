@@ -9,6 +9,8 @@ public interface AnswerService {
 
     Answer create(Answer answer);
 
+    Collection<Answer> createList(Collection<Answer> answers);
+
     Collection<Answer> list();
 
     Collection<Answer> listByQuiz(Long quizId);
