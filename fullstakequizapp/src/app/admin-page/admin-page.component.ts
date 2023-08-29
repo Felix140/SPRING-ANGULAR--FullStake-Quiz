@@ -15,11 +15,23 @@ export class AdminPageComponent implements OnInit {
 
   public topicList: any = [];
   public selectedTopic!: Topic;
-  // Array di risposte sbagliate;
-  public answers: Answer[] = []; // Usare l'array di tipo Answer
-  // Domanda
-  public question: string = "";
-  public questionId: number = this.questionService.getQuestions.length + 1;
+  // QUESTIONS
+  public question!: string;
+  public questionList: any = [];
+  // RISPOSTE;
+  public correctAnswer: Answer = {
+    id: 0,
+    esito: true,
+    risposta: '',
+    quizEntity: this.getIdQuestion(),
+  }
+  public unCorrectAnswer: Answer[] = [{
+    id: 0,
+    esito: false,
+    risposta: '',
+    quizEntity: this.getIdQuestion(),
+  }
+  ];
 
 
   constructor(
@@ -29,6 +41,7 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTopics();
+    this.getIdQuestion();
   }
 
   //* GET TOPICs
@@ -39,23 +52,42 @@ export class AdminPageComponent implements OnInit {
         console.log(this.topicList);
       })
   }
+  //* GET QUESTIONs + ASSIGN ID QUESTION
+  getIdQuestion(): number {
+    this.questionService.getQuestions()
+      .subscribe(res => {
+        this.questionList = res;
+        console.log(this.questionList);
+      })
 
-  // Aggiunge contenitore <div> di ANSWER FALSE
-  createWrongAns() {
+    const questionId: number = this.questionList.length + 1; //qui assegno attributo ID di QUESTION
+    return questionId
+  }
+
+
+  //* Aggiunge contenitore <div> di ANSWER FALSE
+  addWrongAns() {
     // Creare un oggetto Answer con i valori di default
-    this.answers.push({
-      id: this.answerService.addAnswerList.length + 1,
+    this.unCorrectAnswer.push({
+      id: 0,
       esito: false,
       risposta: '',
-      quizEntity: this.questionId // Assegna l'ID della domanda
+      quizEntity: this.getIdQuestion() // Assegna l'ID della domanda
     });
+
   }
 
 
   inviaForm(): void {
 
+    //* CREO l'array contenente TUTTE le ANSWERS
+    const risposteArray: Answer[] = [this.correctAnswer, ...this.unCorrectAnswer];
+
+    //? aggiungi QUESTION
+
+    //* CREO l'oggetto della QUESTION
     const questionObj: Question = {
-      id: this.questionId,
+      id: this.getIdQuestion(),
       domanda: this.question,
       topicEntity: {
         id: 1, // TODO settare il TOPIC di appartenenza in base alla select
@@ -65,27 +97,19 @@ export class AdminPageComponent implements OnInit {
       risposte: []
     };
 
+    //* INVOCA metodo della richiesta HTTP per aggiungere la domanda
     this.questionService.addQuestion(questionObj)
       .subscribe(res => {
         console.log("Domanda aggiunta:", res);
 
-        // const idComune = res.id;
-        // questionObj.id = idComune;
-
-        const risposteArray: Answer[] = this.answers.map(answer => {
-          return {
-            id: 0,
-            esito: false, //TODO settare il boolean in base al tipo di contenitore riempito
-            risposta: answer.risposta,
-            quizEntity: questionObj.id // Assegna l'ID della domanda
-          };
-        });
-
-
+        //? Dopo aver aggiunto la domanda, invia le risposte
+        
+        //* INVOCA metodo della richiesta HTTP per aggiungere le risposte
         this.answerService.addAnswerList(risposteArray)
           .subscribe(response => {
             console.log("Risposte aggiunte:", response);
           });
       });
   }
+
 }

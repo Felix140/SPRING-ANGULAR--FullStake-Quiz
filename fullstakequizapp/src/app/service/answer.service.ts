@@ -20,7 +20,7 @@ export class AnswerService {
 
   //* POST (list) -> Answer[]
   public addAnswerList(answer: Answer[]): Observable<Answer[]> {
-    return this.http.post<Answer[]>(`${this.apiServerUrl}/answer/add`, answer);
+    return this.http.post<Answer[]>(`${this.apiServerUrl}/answer/add_list`, answer);
   }
 
   //* GET (list)
