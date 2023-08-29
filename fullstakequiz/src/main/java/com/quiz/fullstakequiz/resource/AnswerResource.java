@@ -25,6 +25,13 @@ public class AnswerResource {
         return new ResponseEntity<>(newAnswer, HttpStatus.CREATED);
     }
 
+    //* POST (list)
+    @PostMapping("/add_list")
+    public ResponseEntity<Collection<Answer>> createAnswerList(@RequestBody Collection<Answer> answers) {
+        Collection<Answer> savedAnswers = answerService.createList(answers);
+        return new ResponseEntity<>(savedAnswers, HttpStatus.CREATED);
+    }
+
 
     //* GET (list)
     @GetMapping("/all")
