@@ -1,8 +1,9 @@
-import { Topic } from "./topic";
 
 export interface Question {
     id: number;
     domanda: string;
-    topicEntity: Topic;
+    topicEntity: {
+        id: number | null
+    },
     risposte: any;
 }

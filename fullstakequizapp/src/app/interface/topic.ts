@@ -1,5 +1,5 @@
 export interface Topic {
     id: number;
-    topicTitle: string;
-    quizEntity: any;
+    topicTitle: string | null;
+    quizEntity: any[];
 }

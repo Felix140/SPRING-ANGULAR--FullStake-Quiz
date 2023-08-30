@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Answer } from '../interface/answer';
 import { Question } from '../interface/question';
-import { Topic } from '../interface/topic';
 import { AnswerService } from '../service/answer.service';
 import { QuestionService } from '../service/question.service';
 import { TopicService } from '../service/topic.service';
@@ -13,39 +12,36 @@ import { TopicService } from '../service/topic.service';
 })
 export class AdminPageComponent implements OnInit {
 
+  //* TOPIC
   public topicList: any = [];
-  public selectedTopic!: Topic;
+  public selectedTopic: string = "";
+  public currTopicId!: number;
+  public selectedButtonIndex: number | null = null;
+
   //* QUESTIONS
   public question!: string;
   public questionList: any = [];
   //CREO l'oggetto della QUESTION
   public questionObj: Question = {
     id: this.getIdQuestion(),
-    domanda: this.question,
+    domanda: '',
     topicEntity: {
-      id: 1, // TODO settare il TOPIC di appartenenza in base alla select
-      topicTitle: '',
-      quizEntity: []
+      id: null
     },
     risposte: []
   };
+
   //* RISPOSTE
   public correctAnswer: Answer = {
     esito: true,
     risposta: '',
-    quizEntity: { //? ATTENZIONE: bisogna creare un oggetto dentro l'interfaccia
-      id: this.questionObj.id,
+    quizEntity: {
+      id: this.questionObj.id
+    }
+  };
 
-    }
-  }
-  public unCorrectAnswer: Answer[] = [{
-    esito: false,
-    risposta: '',
-    quizEntity: { //? ATTENZIONE: bisogna creare un oggetto dentro l'interfaccia
-      id: this.questionObj.id,
-    }
-  }
-  ];
+  public unCorrectAnswer: Answer[] = [];
+
 
 
   constructor(
@@ -58,6 +54,9 @@ export class AdminPageComponent implements OnInit {
     this.getIdQuestion();
   }
 
+
+
+
   //* GET TOPICs
   getAllTopics() {
     this.topicService.getTopics()
@@ -66,6 +65,19 @@ export class AdminPageComponent implements OnInit {
         console.log(this.topicList);
       })
   }
+  //* SELECT TOPIC
+  selectTopic(topicTitle: string, topicId: number, index: number): void {
+    // topic TITLE
+    this.topicService.setSelectedTopic(topicTitle);
+    this.selectedTopic = topicTitle;
+    this.selectedButtonIndex = index;
+    console.log(this.selectedTopic);
+
+    // topic ID
+    this.currTopicId = topicId;
+    console.log(this.currTopicId);
+  }
+
   //* GET QUESTIONs + ASSIGN ID QUESTION
   getIdQuestion(): number {
     this.questionService.getQuestions()
@@ -74,10 +86,21 @@ export class AdminPageComponent implements OnInit {
         console.log(this.questionList);
       })
 
-    const questionId: number = this.questionList.length + 1; //qui assegno attributo ID di QUESTION
-    return questionId
+    return this.questionList.length + 1; //qui assegno attributo ID di QUESTION
   }
+  setQuestion(): Question {
+    //* 1 -OVERRIDO e AGGIORNO l'oggetto questionObj
+    this.questionObj = {
+      id: this.getIdQuestion(),
+      domanda: this.question,
+      topicEntity: {
+        id: this.currTopicId
+      },
+      risposte: []
+    }
 
+    return this.questionObj
+  }
 
   //* Aggiunge contenitore <div> di ANSWER FALSE
   addWrongAns() {
@@ -86,33 +109,59 @@ export class AdminPageComponent implements OnInit {
       esito: false,
       risposta: '',
       quizEntity: {
-        id: this.questionObj.id,
+        id: this.getIdQuestion()
       }
     });
+  }
+  setAnswers(): Answer[] {
+    //* 1 -OVERRIDO e AGGIORNO l'oggetto questionObj
+    this.questionObj = {
+      id: this.getIdQuestion(),
+      domanda: this.question,
+      topicEntity: {
+        id: this.currTopicId
+      },
+      risposte: []
+    };
 
+    //* 2 -CREO l'oggetto correctAnswer con l'ID del quiz corrente
+    this.correctAnswer = {
+      esito: true,
+      risposta: this.correctAnswer.risposta,
+      quizEntity: {
+        id: this.questionObj.id
+      }
+    };
+
+    //* 3 -UNISCO GLI ARRAY DI ANSWERS
+    const allAnswers: Answer[] = [this.correctAnswer, ...this.unCorrectAnswer];
+    return allAnswers;
   }
 
+
+
+  //* INVIA FORM
   inviaForm(): void {
 
-    //* CREO l'array contenente TUTTE le ANSWERS
-    const risposteArray: Answer[] = [this.correctAnswer, ...this.unCorrectAnswer];
+    const allAnswers: Answer[] = this.setAnswers();
 
     //? aggiungi QUESTION
 
-    //* INVOCA metodo della richiesta HTTP per aggiungere la domanda
-    this.questionService.addQuestion(this.questionObj)
+    //* 3 -INVOCA metodo della richiesta HTTP per aggiungere la domanda
+    this.questionService.addQuestion(this.setQuestion())
       .subscribe(res => {
+
         console.log("Domanda aggiunta:", res);
-        console.log("Risposte da aggiungere:", risposteArray);
+        console.log("Risposte da aggiungere:", allAnswers);
+
         //? Dopo aver aggiunto la domanda, invia le risposte
 
-        //* INVOCA metodo della richiesta HTTP per aggiungere le risposte
-        this.answerService.addAnswerList(risposteArray)
+        //* 4 -INVOCA metodo della richiesta HTTP per aggiungere l'array di risposte
+        this.answerService.addAnswerList(allAnswers)
           .subscribe(response => {
             console.log("Risposte aggiunte:", response);
           });
       });
-      
-  }
 
+  }
 }
