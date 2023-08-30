@@ -15,21 +15,35 @@ export class AdminPageComponent implements OnInit {
 
   public topicList: any = [];
   public selectedTopic!: Topic;
-  // QUESTIONS
+  //* QUESTIONS
   public question!: string;
   public questionList: any = [];
-  // RISPOSTE;
+  //CREO l'oggetto della QUESTION
+  public questionObj: Question = {
+    id: this.getIdQuestion(),
+    domanda: this.question,
+    topicEntity: {
+      id: 1, // TODO settare il TOPIC di appartenenza in base alla select
+      topicTitle: '',
+      quizEntity: []
+    },
+    risposte: []
+  };
+  //* RISPOSTE
   public correctAnswer: Answer = {
-    id: 0,
     esito: true,
     risposta: '',
-    quizEntity: this.getIdQuestion(),
+    quizEntity: { //? ATTENZIONE: bisogna creare un oggetto dentro l'interfaccia
+      id: this.questionObj.id,
+
+    }
   }
   public unCorrectAnswer: Answer[] = [{
-    id: 0,
     esito: false,
     risposta: '',
-    quizEntity: this.getIdQuestion(),
+    quizEntity: { //? ATTENZIONE: bisogna creare un oggetto dentro l'interfaccia
+      id: this.questionObj.id,
+    }
   }
   ];
 
@@ -69,14 +83,14 @@ export class AdminPageComponent implements OnInit {
   addWrongAns() {
     // Creare un oggetto Answer con i valori di default
     this.unCorrectAnswer.push({
-      id: 0,
       esito: false,
       risposta: '',
-      quizEntity: this.getIdQuestion() // Assegna l'ID della domanda
+      quizEntity: {
+        id: this.questionObj.id,
+      }
     });
 
   }
-
 
   inviaForm(): void {
 
@@ -85,31 +99,20 @@ export class AdminPageComponent implements OnInit {
 
     //? aggiungi QUESTION
 
-    //* CREO l'oggetto della QUESTION
-    const questionObj: Question = {
-      id: this.getIdQuestion(),
-      domanda: this.question,
-      topicEntity: {
-        id: 1, // TODO settare il TOPIC di appartenenza in base alla select
-        topicTitle: '',
-        quizEntity: undefined
-      },
-      risposte: []
-    };
-
     //* INVOCA metodo della richiesta HTTP per aggiungere la domanda
-    this.questionService.addQuestion(questionObj)
+    this.questionService.addQuestion(this.questionObj)
       .subscribe(res => {
         console.log("Domanda aggiunta:", res);
-
+        console.log("Risposte da aggiungere:", risposteArray);
         //? Dopo aver aggiunto la domanda, invia le risposte
-        
+
         //* INVOCA metodo della richiesta HTTP per aggiungere le risposte
         this.answerService.addAnswerList(risposteArray)
           .subscribe(response => {
             console.log("Risposte aggiunte:", response);
           });
       });
+      
   }
 
 }

@@ -2,7 +2,8 @@
     <form action="" class="add-question__form">
 
         <!-- SELEZIONA TOPIC (ngFor) -->
-        <select class="form-select" aria-label="Default select example">
+        
+        <select class="form-select my-3" aria-label="Default select example">
             <option Selected>Seleziona Topic </option>
             <ng-container *ngFor="let topic of topicList; let i = index">
                 <!--? prendo l'INDEX di topicList -->
@@ -12,35 +13,42 @@
 
         <!-- QUESTION -->
 
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">DOMANDA: </label>
+        <div class="my-3">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                <h5>DOMANDA</h5>
+            </label>
             <textarea class="form-control" input="text" id="question" rows="3" style="resize: none" name="question"
                 [(ngModel)]="question"></textarea>
         </div>
 
         <!-- RISPOSTE GIUSTA -->
 
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">VERO</label>
-            <textarea class="form-control border border-5 border-success" id="correctAnswer" rows="3"
+        <div class="my-3">
+            <label for="correctAnswer">
+                <h5>Risposta <span>CORRETTA</span></h5>
+            </label>
+            <textarea class="form-control border border-5 border-success text-primary" id="correctAnswer" rows="3"
                 style="resize: none" name="correctAnswer" [(ngModel)]="correctAnswer.risposta"></textarea>
         </div>
 
         <!-- RISPOSTE FALSE -->
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">FALSO</label>
             <textarea class="form-control  border border-5 border-danger" id="unCorrectAnswer" rows="3"
                 style="resize: none" name="unCorrectAnswer" [(ngModel)]="unCorrectAnswer[0].risposta"></textarea>
-        </div>
+        </div> -->
 
         <!--? Aggiungi una sezione per le risposte errate -->
-        <div *ngFor="let answer of unCorrectAnswer; let i = index" class="mb-3">
+        <div *ngFor="let answer of unCorrectAnswer; let i = index" class="my-3">
             <button type="button" class="btn-close" aria-label="Close"></button>
             <div>
-                <label for="unCorrectAnswer{{i}}" class="form-label"></label>
-                <textarea class="form-control  border border-5 border-danger" id="unCorrectAnswer{{i}}"
-                    rows="3" style="resize: none" name="unCorrectAnswer" [(ngModel)]="unCorrectAnswer[i].risposta"></textarea>
+                <label for="unCorrectAnswer{{i}}" class="form-label">
+                    <h5>Risposta <span> FALSA </span>{{i + 1}} </h5>
+                </label>
+                <textarea class="form-control  border border-5 border-danger" id="unCorrectAnswer{{i}}" rows="3"
+                    style="resize: none" name="unCorrectAnswer{{i}}"
+                    [(ngModel)]="unCorrectAnswer[i].risposta"></textarea>
             </div>
         </div>
 
