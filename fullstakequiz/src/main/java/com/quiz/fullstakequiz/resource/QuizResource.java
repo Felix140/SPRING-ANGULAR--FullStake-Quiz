@@ -27,6 +27,13 @@ public class QuizResource {
         return new ResponseEntity<>(newQuiz, HttpStatus.CREATED);
     }
 
+    //* POST + Set ID
+    @PostMapping("/add/{id}")
+    public ResponseEntity<Quiz> addQuizById(@RequestBody Quiz quiz, @PathVariable("id") Long id) {
+        Quiz newQuiz = quizService.create(quiz);
+        return new ResponseEntity<>(newQuiz, HttpStatus.CREATED);
+    }
+
 
     //* GET (list)
     @GetMapping("/all")
