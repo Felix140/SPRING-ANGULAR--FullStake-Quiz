@@ -15,7 +15,7 @@
                     </button>
                 </ng-container>
             </div>
-            <input type="number" [(ngModel)]="currTopicId" name="topicTitle" id="currTopicId" readonly hidden>
+            <input type="number" [(ngModel)]="currTopicId" name="topicTitle" id="currTopicId" readonly>
         </div>
 
         <!--? QUESTION -->
@@ -25,7 +25,8 @@
                 <h5>DOMANDA</h5>
             </label>
             <textarea class="form-control" input="text" id="questionId" rows="3" style="resize: none" name="question"
-                [(ngModel)]="question"></textarea>
+                [(ngModel)]="question" required></textarea>
+            <input type="number" [(ngModel)]="currQuestionId" name="topicTitle" id="currTopicId" readonly>
         </div>
 
         <!--? RISPOSTE GIUSTA -->
@@ -35,7 +36,7 @@
                 <h5>Risposta <span>CORRETTA</span></h5>
             </label>
             <textarea class="form-control border border-5 border-success text-success" id="correctAnswer" rows="3"
-                style="resize: none" name="correctAnswer" [(ngModel)]="correctAnswer.risposta"></textarea>
+                style="resize: none" name="correctAnswer" [(ngModel)]="correctAnswer.risposta" required></textarea>
         </div>
 
         <!--? RISPOSTE FALSE -->
@@ -54,8 +55,8 @@
                     <h5>Risposta <span> FALSA </span>{{i + 1}} </h5>
                 </label>
                 <textarea class="form-control  border border-5 border-danger" id="unCorrectAnswer{{i + 1}}" rows="3"
-                    style="resize: none" name="unCorrectAnswer{{i + 1}}"
-                    [(ngModel)]="unCorrectAnswer[i].risposta"></textarea>
+                    style="resize: none" name="unCorrectAnswer{{i + 1}}" [(ngModel)]="unCorrectAnswer[i].risposta"
+                    required></textarea>
             </div>
         </div>
 
@@ -63,7 +64,7 @@
         <div class="d-flex justify-content-between">
             <button class="btn btn-danger text-uppercase fw-bold" (click)="addWrongAns()">Aggiungi
                 Risposta FALSA</button>
-            <button class="btn btn-primary text-uppercase fw-bold rounded-circle" (click)="inviaForm()">
+            <button class="btn btn-primary text-uppercase fw-bold rounded-circle" type="submit" (click)="inviaForm()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-send-fill" viewBox="0 0 16 16">
                     <path

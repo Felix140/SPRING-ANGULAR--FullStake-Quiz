@@ -23,13 +23,14 @@ export class AdminPageComponent implements OnInit {
   public questionList: any = [];
   //CREO l'oggetto della QUESTION
   public questionObj: Question = {
-    id: this.getIdQuestion(),
+    id: 0,
     domanda: '',
     topicEntity: {
       id: null
     },
     risposte: []
   };
+  public currQuestionId!: number;
 
   //* RISPOSTE
   public correctAnswer: Answer = {
@@ -39,7 +40,6 @@ export class AdminPageComponent implements OnInit {
       id: this.questionObj.id
     }
   };
-
   public unCorrectAnswer: Answer[] = [];
 
 
@@ -79,19 +79,18 @@ export class AdminPageComponent implements OnInit {
   }
 
   //* GET QUESTIONs + ASSIGN ID QUESTION
-  getIdQuestion(): number {
+  getIdQuestion() {
     this.questionService.getQuestions()
       .subscribe(res => {
         this.questionList = res;
         console.log(this.questionList);
+        this.currQuestionId = this.questionList.length + 1; //qui assegno attributo ID di QUESTION
       })
-
-    return this.questionList.length + 1; //qui assegno attributo ID di QUESTION
   }
   setQuestion(): Question {
     //* 1 -OVERRIDO e AGGIORNO l'oggetto questionObj
     this.questionObj = {
-      id: this.getIdQuestion(),
+      id: this.currQuestionId,
       domanda: this.question,
       topicEntity: {
         id: this.currTopicId
@@ -109,14 +108,14 @@ export class AdminPageComponent implements OnInit {
       esito: false,
       risposta: '',
       quizEntity: {
-        id: this.getIdQuestion()
+        id: this.currQuestionId
       }
     });
   }
   setAnswers(): Answer[] {
     //* 1 -OVERRIDO e AGGIORNO l'oggetto questionObj
     this.questionObj = {
-      id: this.getIdQuestion(),
+      id: this.currQuestionId,
       domanda: this.question,
       topicEntity: {
         id: this.currTopicId
@@ -129,7 +128,7 @@ export class AdminPageComponent implements OnInit {
       esito: true,
       risposta: this.correctAnswer.risposta,
       quizEntity: {
-        id: this.questionObj.id
+        id: this.currQuestionId
       }
     };
 
@@ -143,15 +142,22 @@ export class AdminPageComponent implements OnInit {
   //* INVIA FORM
   inviaForm(): void {
 
+    // Verifica se il topic è stato selezionato
+    if (!this.selectedTopic) { // se selectedTopic NON ha un valore allora NON è stato selezionato
+      alert("Seleziona un topic prima di inviare il form.");
+      return; // Interrompi l'esecuzione del metodo
+    }
+
     const allAnswers: Answer[] = this.setAnswers();
 
     //? aggiungi QUESTION
 
     //* 3 -INVOCA metodo della richiesta HTTP per aggiungere la domanda
-    this.questionService.addQuestion(this.setQuestion())
+    this.questionService.addQuestionById(this.setQuestion(), this.currQuestionId)
       .subscribe(res => {
 
         console.log("Domanda aggiunta:", res);
+        console.log("ID della domanda:", this.currQuestionId);
         console.log("Risposte da aggiungere:", allAnswers);
 
         //? Dopo aver aggiunto la domanda, invia le risposte

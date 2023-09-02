@@ -52,8 +52,9 @@ export class QuestionComponent implements OnInit {
         console.log(res);
         //this.questionList = res;
         //this.questionList = shuffle(res).slice(0, 10); // MISCHIA in maniera RANDOMICA 10 questions
-        const selectedTopic = this.topicService.getSelectedTopic();
-        this.questionList = shuffle(res.filter((question: any) => question.topicEntity.topicTitle === selectedTopic)).slice(0, 10);
+        const selectedTopic = this.topicService.getSelectedTopic(); //* DA QUI PRENDO IL TOPIC SELEZIONATO IN topic-config
+        this.questionList = shuffle(res.filter((question: any) => //* FILTRA e poi:
+          question.topicEntity.topicTitle === selectedTopic)).slice(0, 10); //* Seleziono le QUESTION inbase al SELECTEDTOPIC
       })
   }
 

@@ -19,6 +19,11 @@ export class QuestionService {
     return this.http.post<Question[]>(`${this.apiServerUrl}/quiz/add`, question);
   }
 
+  //* POST + setID
+  public addQuestionById(question: Question, questionId: number): Observable<Question[]> {
+    return this.http.post<Question[]>(`${this.apiServerUrl}/quiz/add/${questionId}`, question);
+  }
+
 
   //* GET (list)
   public getQuestions(): Observable<Question[]> {
