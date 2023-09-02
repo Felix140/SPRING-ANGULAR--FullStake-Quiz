@@ -31,6 +31,7 @@ public class QuizResource {
     @PostMapping("/add/{id}")
     public ResponseEntity<Quiz> addQuizById(@RequestBody Quiz quiz, @PathVariable("id") Long id) {
         Quiz newQuiz = quizService.create(quiz);
+        quiz.setId(id); // qui setto l'ID dal FRONTEND
         return new ResponseEntity<>(newQuiz, HttpStatus.CREATED);
     }
 
