@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Answer } from '../interface/answer';
 import { Question } from '../interface/question';
 import { AnswerService } from '../service/answer.service';
@@ -42,6 +42,9 @@ export class AdminPageComponent implements OnInit {
   };
   public unCorrectAnswer: Answer[] = [];
 
+  //* MODAL
+  @ViewChild('modalButton') modalButton!: ElementRef;
+
 
 
   constructor(
@@ -58,7 +61,7 @@ export class AdminPageComponent implements OnInit {
 
 
   //* GET TOPICs
-  getAllTopics() {
+  getAllTopics(): void {
     this.topicService.getTopics()
       .subscribe(res => {
         this.topicList = res;
@@ -79,7 +82,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   //* GET QUESTIONs + ASSIGN ID QUESTION
-  getIdQuestion() {
+  getIdQuestion(): void {
     this.questionService.getQuestions()
       .subscribe(res => {
         this.questionList = res;
@@ -102,7 +105,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   //* Aggiunge contenitore <div> di ANSWER FALSE
-  addWrongAns() {
+  addWrongAns(): void {
     // Creare un oggetto Answer con i valori di default
     this.unCorrectAnswer.push({
       esito: false,
@@ -169,5 +172,11 @@ export class AdminPageComponent implements OnInit {
           });
       });
 
+    this.modalButton.nativeElement.click();
+  }
+
+  //* MODAL BTN: ricarica la pagina
+  refreshPage(): void {
+    window.location.reload();
   }
 }
