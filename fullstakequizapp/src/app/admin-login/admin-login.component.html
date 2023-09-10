@@ -2,15 +2,17 @@
 
     <!-- <img src="" alt="immagine logo"> -->
 
-    <form class="login-admin__form">
+    <form class="login-admin__form" (ngSubmit)="loginAdmin()">
+
         <div class="mb-3">
             <label for="adminName" class="form-label">Admin Name</label>
-            <input type="text" class="form-control" id="adminName"  required>
+            <input [(ngModel)]="nameInput" type="text" class="form-control" id="adminName" name="nameInput" required>
         </div>
         <div class="mb-3">
             <label for="adminPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="adminPassword" required>
+            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput" required>
         </div>
-        <button type="submit" class="btn btn-primary" routerLink="/admin-page">Accedi</button>
+        <button type="submit" class="btn btn-primary">Accedi</button>
+
     </form>
 </div>
