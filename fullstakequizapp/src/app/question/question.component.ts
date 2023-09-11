@@ -120,18 +120,22 @@ export class QuestionComponent implements OnInit {
   //* ESITO della Risposta
   selectAnswer(currentAnswer: boolean): void {
 
-    if (currentAnswer) {
+    if (currentAnswer) { //* se è corretta
+
       this.points += 10;
       this.correctAnswer++;
       this.nextQuestion();
-    } else {
+
+    } else {  //* se è sbagliata
+
       if (this.points !== 0) {
-        this.points -= 10
+        this.points -= 0;
       } else {
         this.points = 0;
       }
       this.wrongAnswer++;
       this.nextQuestion();
+      
     }
   }
 
@@ -145,7 +149,6 @@ export class QuestionComponent implements OnInit {
         if (this.timer === 0) {
           this.currentQuestion++;
           this.timer = 60;
-          this.points -= 10;
         }
       });
 
