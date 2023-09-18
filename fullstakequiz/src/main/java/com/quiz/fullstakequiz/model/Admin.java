@@ -17,10 +17,9 @@ public class Admin implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false, unique = true, name = "id_admin")
     private Long id;
-
-
+    @Column(nullable = false)
     private String adminName;
-
+    @Column(nullable = false)
     private String password;
 
     //* SETTERS

@@ -10,6 +10,8 @@ import { AdminService } from '../service/admin.service';
 })
 export class AdminLoginComponent implements OnInit {
 
+  formSelected: string = "signIn";
+
   //* Campi FORM
   nameInput: string = "";
   passInput: string = "";
@@ -23,6 +25,10 @@ export class AdminLoginComponent implements OnInit {
     this.getAdminList();
   }
 
+  selectForm(formSelect: string) {
+    this.formSelected = formSelect;
+  }
+
   //* GET lista admin
   getAdminList(): void {
     this.adminService.getAdmins()
@@ -34,7 +40,7 @@ export class AdminLoginComponent implements OnInit {
 
   //* CHECK CREDENZIALI
   checkAdmin(): boolean {
-    
+
     let check: boolean = false; // mettere una LET e non una CONST
 
     for (let i = 0; i < this.adminList.length; i++) {
@@ -67,5 +73,9 @@ export class AdminLoginComponent implements OnInit {
       alert('Le credenziali sono errate');
     }
   }
-  
+
+
+  public registerAdmin() {
+    
+  }
 }

@@ -1,8 +1,11 @@
 <div class="login-admin">
 
-    <!-- <img src="" alt="immagine logo"> -->
+    <div class="sign-buttons d-flex justify-content-evenly">
+        <button class="btn btn-primary" (click)="selectForm('signIn')">Log In</button>
+        <button class="btn btn-primary" (click)="selectForm('signUp')">Register</button>
+    </div>
 
-    <form class="login-admin__form" (ngSubmit)="loginAdmin()">
+    <form *ngIf="formSelected == 'signIn'" class="login-admin__form" (ngSubmit)="loginAdmin()">
 
         <div class="mb-3">
             <label for="adminName" class="form-label">Admin Name</label>
@@ -12,7 +15,27 @@
             <label for="adminPassword" class="form-label">Password</label>
             <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput" required>
         </div>
-        <button type="submit" class="btn btn-primary">Accedi</button>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+
+    </form>
+
+    <form *ngIf="formSelected === 'signUp'" class="login-admin__form" (ngSubmit)="registerAdmin()">
+
+        <div class="mb-3">
+            <label for="adminName" class="form-label">Admin Name</label>
+            <input [(ngModel)]="nameInput" type="text" class="form-control" id="adminName" name="nameInput" required>
+        </div>
+        <div class="mb-3">
+            <label for="adminPassword" class="form-label">Password</label>
+            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="adminPassword" class="form-label">Ripeti Password</label>
+            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
 
     </form>
 </div>
