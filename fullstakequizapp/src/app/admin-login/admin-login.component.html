@@ -5,34 +5,60 @@
         <button class="btn btn-primary" (click)="selectForm('signUp')">Register</button>
     </div>
 
+    <!-- SIGNIN -->
+
     <form *ngIf="formSelected == 'signIn'" class="login-admin__form" (ngSubmit)="loginAdmin()">
 
+        <!-- NAME INPUT(adminName) -->
         <div class="mb-3">
             <label for="adminName" class="form-label">Admin Name</label>
             <input [(ngModel)]="nameInput" type="text" class="form-control" id="adminName" name="nameInput" required>
         </div>
+
+        <!-- PASSWORD -->
         <div class="mb-3">
             <label for="adminPassword" class="form-label">Password</label>
-            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput" required>
+            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput"
+                required>
         </div>
         <button type="submit" class="btn btn-primary">Sign In</button>
 
     </form>
 
+    <!-- SIGNUP -->
+
     <form *ngIf="formSelected === 'signUp'" class="login-admin__form" (ngSubmit)="registerAdmin()">
 
+        <!-- FIRST NAME -->
+        <div class="mb-3">
+            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="firstName">
+            <label for="firstName" class="form-label">First Name</label>
+        </div>
+
+        <!-- LAST NAME -->
+        <div class="mb-3">
+            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName">
+            <label for="lastName" class="form-label">Last Name</label>
+        </div>
+
+        <!-- NAME INPUT(adminName) -->
         <div class="mb-3">
             <label for="adminName" class="form-label">Admin Name</label>
             <input [(ngModel)]="nameInput" type="text" class="form-control" id="adminName" name="nameInput" required>
         </div>
+
+        <!-- PASSWORD -->
         <div class="mb-3">
             <label for="adminPassword" class="form-label">Password</label>
-            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput" required>
+            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput"
+                required>
         </div>
 
+        <!-- REPEAT PASSWORD -->
         <div class="mb-3">
             <label for="adminPassword" class="form-label">Ripeti Password</label>
-            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput" required>
+            <input [(ngModel)]="passInput" type="password" class="form-control" id="adminPassword" name="passInput"
+                required>
         </div>
 
         <button type="submit" class="btn btn-primary">Sign Up</button>

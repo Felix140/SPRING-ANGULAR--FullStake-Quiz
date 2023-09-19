@@ -20,4 +20,6 @@ public interface AdminService {
 
     AdminDto login(CredentialsDto credentials);
     AdminDto register(SignUpDto signUp);
+
+    AdminDto findByAdminName(String adminName);
 }

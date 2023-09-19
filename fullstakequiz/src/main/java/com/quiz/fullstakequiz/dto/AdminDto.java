@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 public class AdminDto {
 
     private Long id;
+    private String firstName;
+    private String lastName;
     private String adminName;
     private String token;
 }
