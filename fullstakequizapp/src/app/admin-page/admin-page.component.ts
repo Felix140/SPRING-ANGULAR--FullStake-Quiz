@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Answer } from '../interface/answer';
 import { Question } from '../interface/question';
 import { AnswerService } from '../service/answer.service';
+import { AuthService } from '../service/auth.service';
 import { QuestionService } from '../service/question.service';
 import { TopicService } from '../service/topic.service';
 
@@ -50,9 +51,16 @@ export class AdminPageComponent implements OnInit {
   constructor(
     private topicService: TopicService,
     private questionService: QuestionService,
-    private answerService: AnswerService) { }
+    private answerService: AnswerService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.request(
+      "GET",
+      "/admin-page",
+      {}
+    );
+    
     this.getAllTopics();
     this.getIdQuestion();
   }

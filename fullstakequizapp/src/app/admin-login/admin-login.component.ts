@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Admin } from '../interface/admin';
 import { AdminService } from '../service/admin.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -10,8 +11,8 @@ import { AdminService } from '../service/admin.service';
 })
 export class AdminLoginComponent implements OnInit {
 
-  @Output() onSubmitLoginEvent = new EventEmitter();
-  @Output() onSubmitRegisterEvent = new EventEmitter();
+  // @Output() onSubmitLoginEvent = new EventEmitter();
+  // @Output() onSubmitRegisterEvent = new EventEmitter();
 
   formSelected: string = "signIn";
 
@@ -25,7 +26,10 @@ export class AdminLoginComponent implements OnInit {
   public adminList: Admin[] = [];
 
   //? import Router per il dispatch verso admin-page
-  constructor(private adminService: AdminService, private router: Router) { }
+  constructor(
+    private adminService: AdminService,
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     // this.getAdminList();
@@ -81,15 +85,25 @@ export class AdminLoginComponent implements OnInit {
   // }
 
   public loginAdmin() {
-    this.onSubmitLoginEvent.emit({
-      "adminName": this.nameInput,
-      "password": this.passInput
-    });
+    this.authService.request(
+      "POST",
+      "/login",
+      {
+        adminName: this.nameInput,
+				password: this.passInput
+      }
+    );
   }
   public registerAdmin() {
-    this.onSubmitRegisterEvent.emit({
-      "adminName": this.nameInput,
-      "password": this.passInput
-    });
+    this.authService.request(
+      "POST",
+      "/register",
+      {
+        firstName: this.firstName,
+				lastName: this.lastName,
+				adminName: this.nameInput,
+				password: this.passInput
+      }
+      );
   }
 }
